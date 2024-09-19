@@ -9,15 +9,21 @@ async function addPart() {
     const units = document.getElementById('units').value;
     const avgCost = parseFloat(document.getElementById('avgCost').value);
 
+    if (!pid || !title || !description || isNaN(stock) || !units || isNaN(avgCost)) {
+        alert('Please fill all fields with valid data.');
+        return;
+    }
+
     const part = { pid, title, description, stock, units, avgCost };
 
     try {
         await backend.addCarPart(part);
         alert('Part added successfully!');
         loadAllParts();
+        clearForm();
     } catch (error) {
         console.error('Error adding part:', error);
-        alert('Failed to add part. Please try again.');
+        alert('Failed to add part. Please try again. Error: ' + error.message);
     }
 }
 
@@ -28,6 +34,7 @@ async function loadAllParts() {
         displayParts(parts);
     } catch (error) {
         console.error('Error loading parts:', error);
+        alert('Failed to load parts. Please try again. Error: ' + error.message);
     }
 }
 
@@ -39,6 +46,7 @@ async function searchParts() {
         displayParts(parts);
     } catch (error) {
         console.error('Error searching parts:', error);
+        alert('Failed to search parts. Please try again. Error: ' + error.message);
     }
 }
 
@@ -71,6 +79,11 @@ async function updatePart(pid) {
     const newUnits = prompt('Enter new units:');
     const newAvgCost = parseFloat(prompt('Enter new average cost:'));
 
+    if (!newTitle || !newDescription || isNaN(newStock) || !newUnits || isNaN(newAvgCost)) {
+        alert('Please provide valid data for all fields.');
+        return;
+    }
+
     const updatedPart = {
         pid,
         title: newTitle,
@@ -90,7 +103,7 @@ async function updatePart(pid) {
         }
     } catch (error) {
         console.error('Error updating part:', error);
-        alert('Failed to update part. Please try again.');
+        alert('Failed to update part. Please try again. Error: ' + error.message);
     }
 }
 
@@ -107,9 +120,19 @@ async function deletePart(pid) {
             }
         } catch (error) {
             console.error('Error deleting part:', error);
-            alert('Failed to delete part. Please try again.');
+            alert('Failed to delete part. Please try again. Error: ' + error.message);
         }
     }
+}
+
+// Function to clear the form
+function clearForm() {
+    document.getElementById('pid').value = '';
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('stock').value = '';
+    document.getElementById('units').value = '';
+    document.getElementById('avgCost').value = '';
 }
 
 // Load all parts when the page loads

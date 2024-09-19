@@ -38,16 +38,19 @@ actor {
 
   // Add a new car part
   public func addCarPart(part: CarPart) : async () {
+    Debug.print("Adding part: " # debug_show(part));
     carParts.put(part.pid, part);
   };
 
   // Get all car parts
   public query func getAllCarParts() : async [CarPart] {
+    Debug.print("Getting all parts");
     return Iter.toArray(carParts.vals());
   };
 
   // Search car parts by title
   public query func searchCarParts(searchQuery: Text) : async [CarPart] {
+    Debug.print("Searching for: " # searchQuery);
     let searchResults = Iter.filter(carParts.vals(), func (part: CarPart) : Bool {
       return Text.contains(Text.toLowercase(part.title), #text(Text.toLowercase(searchQuery)));
     });
@@ -56,8 +59,12 @@ actor {
 
   // Update a car part
   public func updateCarPart(part: CarPart) : async Bool {
+    Debug.print("Updating part: " # debug_show(part));
     switch (carParts.get(part.pid)) {
-      case (null) { return false; };
+      case (null) { 
+        Debug.print("Part not found");
+        return false; 
+      };
       case (?_) {
         carParts.put(part.pid, part);
         return true;
@@ -67,8 +74,12 @@ actor {
 
   // Delete a car part
   public func deleteCarPart(pid: Text) : async Bool {
+    Debug.print("Deleting part with PID: " # pid);
     switch (carParts.remove(pid)) {
-      case (null) { return false; };
+      case (null) { 
+        Debug.print("Part not found");
+        return false; 
+      };
       case (?_) { return true; };
     };
   };
