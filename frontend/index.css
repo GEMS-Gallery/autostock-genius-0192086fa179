@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+input, button {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#partsList {
+    margin-top: 20px;
+}
+
+.part-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.part-item button {
+    margin-left: 10px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Parts Inventory</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Car Parts Inventory</h1>
+    
+    <div id="addPartForm">
+        <h2>Add New Part</h2>
+        <input type="text" id="pid" placeholder="PID">
+        <input type="text" id="title" placeholder="Title">
+        <input type="text" id="description" placeholder="Description">
+        <input type="number" id="stock" placeholder="Stock">
+        <input type="text" id="units" placeholder="Units">
+        <input type="number" id="avgCost" placeholder="Average Cost">
+        <button onclick="addPart()">Add Part</button>
+    </div>
+
+    <div id="searchForm">
+        <h2>Search Parts</h2>
+        <input type="text" id="searchQuery" placeholder="Search by title">
+        <button onclick="searchParts()">Search</button>
+    </div>
+
+    <div id="partsList"></div>
+
+    <script src="index.js"></script>
+</body>
+</html>
